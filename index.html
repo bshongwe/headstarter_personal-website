@@ -65,7 +65,7 @@
 							<li><a href="https://github.com/ernest-beqy" class="icon brands fa-github" title="Visit my work GitHub profile" aria-label="Visit my work GitHub profile"><span class="label">GitHub</span></a></li>
 							<li><a href="mailto:shongwe.bhekizwe@yahoo.com" class="icon solid fa-envelope" title="Email me" aria-label="Email me"><span class="label">Email</span></a></li>
 							<li><a href="#" class="icon fa fa-calendar" id="calendly-btn" title="Book a session with me on Calendly" aria-label="Book a session with me on Calendly"><span class="label">Calendly Booking</span></a></li>
-							<li><a href="#" class="icon fa fa-graduation-cap" id="tutor-calendly-btn" title="Book a tutoring session" aria-label="Book a tutoring session"><span class="label">Tutor</span></a></li>
+							<li><a href="#" class="icon fa fa-graduation-cap" id="tutor-calendly-btn" data-cal-link="bhekizwe-shongwe-i5uo9b/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","theme":"dark"}' title="Book a tutoring session" aria-label="Book a tutoring session"><span class="label">Tutor</span></a></li>
 						</ul>
 					</nav>
 				</header>
@@ -80,7 +80,38 @@
 
 		<!--- Dynamic control scripts --->
 		<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-		<script src="https://cal.com/embed.js" async></script>
+		<script type="text/javascript">
+			(function (C, A, L) { 
+				let p = function (a, ar) { a.q.push(ar); }; 
+				let d = C.document; 
+				C.Cal = C.Cal || function () { 
+					let cal = C.Cal; 
+					let ar = arguments; 
+					if (!cal.loaded) { 
+						cal.ns = {}; 
+						cal.q = cal.q || []; 
+						d.head.appendChild(d.createElement("script")).src = A; 
+						cal.loaded = true; 
+					} 
+					if (ar[0] === L) { 
+						const api = function () { p(api, arguments); }; 
+						const namespace = ar[1]; 
+						api.q = api.q || []; 
+						if(typeof namespace === "string"){ 
+							cal.ns[namespace] = cal.ns[namespace] || api;
+							p(cal.ns[namespace], ar);
+							p(cal, ["initNamespace", namespace]);
+						} else p(cal, ar);
+						return;
+					}
+					p(cal, ar);
+				};
+			})(window, "https://app.cal.com/embed/embed.js", "init");
+			
+			Cal("init", "30min", {origin: "https://cal.com"});
+			Cal.ns["30min"]("ui", {"theme": "dark", "hideEventTypeDetails": false, "layout": "month_view"});
+		</script>
+		
 		<script>
 			// Remove preloading class
 			window.onload = function() {
