@@ -93,7 +93,16 @@
 				Calendly.initPopupWidget({ url: 'https://calendly.com/shongwe-bhekizwe/swe-sessions' });
 			});
 
-			// Calendly pop-up for Calendly booking (ALX SE Tutor - I've turned it off)
+			// Helper function to open Cal.com popup
+			function openCalcom(url) {
+				if (window.CalEmbed) {
+					window.CalEmbed.openPopupWidget(url);
+				} else {
+					console.error("Cal.com script not loaded.");
+				}
+			}
+
+			// Cal.com Pop-up Booking Button (Tutor Session)
 			document.getElementById("tutor-calendly-btn").addEventListener("click", function(event) {
 				event.preventDefault();
 				if (window.CalEmbed) {
