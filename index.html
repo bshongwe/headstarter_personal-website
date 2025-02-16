@@ -77,8 +77,10 @@
 
 			</div>
 		</div>
-		
+
+		<!--- Dynamic control scripts --->
 		<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+		<script src="https://cal.com/embed.js" async></script>
 		<script>
 			// Remove preloading class
 			window.onload = function() {
@@ -94,7 +96,11 @@
 			// Calendly pop-up for Calendly booking (ALX SE Tutor - I've turned it off)
 			document.getElementById("tutor-calendly-btn").addEventListener("click", function(event) {
 				event.preventDefault();
-				CalEmbed.openPopupWidget('https://cal.com/bhekizwe-shongwe-i5uo9b/30min');
+				if (window.CalEmbed) {
+					window.CalEmbed.openPopupWidget('https://cal.com/bhekizwe-shongwe-i5uo9b/30min');
+				} else {
+					console.error("Cal.com embed script not loaded.");
+				}
 			});
 		</script>
 	</body>
